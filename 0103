@@ -18,7 +18,7 @@
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/de08ea34-9f14-41b6-8879-67596167f379/image.png)
 
-# ros - 주요 기능
+### ros - 주요 기능
 
 o hardware abstraction
 o low-level device control
@@ -29,13 +29,13 @@ o message-passing between processes o package management
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/1522e45b-0363-42d0-894b-f4e3d684d599/image.png)
 
-# ros - ros wiki
+### ros - ros wiki
 
 [http://wiki.ros.org](http://wiki.ros.org/)
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/98b56db7-d988-4775-ad66-0b3016e0d296/image.png)
 
-# ROS(Robot Operating System)- 중요 개념
+# 2. ROS(Robot Operating System)- 중요 개념
 
 - Nodes
 - Messages and Topics
@@ -49,7 +49,7 @@ o message-passing between processes o package management
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/f3fd3acb-454f-44eb-ab18-08dafbe3b82c/image.png)
 
-# ROS(Robot Operating System)- Node
+### ROS(Robot Operating System)- Node
 
 - 최소 실행 단위 프로그램 - e.g. sensor driver(s), actuator driver(s), map building, planner, UI, etc.
 
@@ -61,16 +61,222 @@ o message-passing between processes o package management
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/6f692daf-d43d-4ffa-861f-027ea0e8ef10/image.png)
 
-# ROS(Robot Operating System)- 메시지 통신
+### ROS(Robot Operating System)- 메시지 통신
 
 - Topic – 단방향 통신, 비동기 통신(아무때나 보내고 다 받음)
     - Publisher : 메시지 송신 / Subscriber : 메시지 수신
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/449b9263-7023-4446-8d5b-4e54fac0a944/image.png)
 
-# ROS의 진정한 목적
+### ROS의 진정한 목적
 
 로보틱스 소프트웨어 개발을 전세계 레벨에서 공동 작업 가능하도록 환경을 구축하는 
+
+# **3. 스왑**
+
+[data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==](data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==)
+
+라즈비안이 설치된 라즈베리파이 시스템에 모자라는 메모리 용량을 확보하는 방법인 
+swap 메모리 사이즈를 변경하는 법
+
+### **SWAP?**
+
+swap메모리는 리눅스 시스템에서 제공하는 기능이며 메모리가 부족한 상황을 대비하여 DRAM이 아니라 하드디스크와 같은 저장장치에 일정 사이즈를 swap 영역으로 설정하고 메모리처럼 사용하는 기능
+
+### **SWAP 용량 늘리기**
+
+```c
+sudo service dphys-swapfile stop
+```
+
+### **수정을 위해 /etc/dphys-swapfile 경로 파일 열기**
+
+```c
+sudo nano /etc/dphys-swapfile
+```
+
+### **설정 후 저장한 뒤 swap 서비스 다시 시작**
+
+```c
+sudo service dphys-swapfile start
+```
+
+# 5. turtle 예제
+
+- roscore
+- rosnode list
+- rosrun turtlesim turtlesim_node
+- rosrun turtlesim turtle_teleop_key
+- rqt_graph
+- rostopic list
+- rostopic echo /turtle/cmd_vel
+
+# ros package 만들기
+
+<aside>
+💡
+
+cs
+catkin_create_pkg my_first_pkg std_msgs rospy roscpp
+
+cs
+cm
+
+</aside>
+
+# listener code
+
+```c
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+/**
+ * This tutorial demonstrates simple receipt of messages over the ROS system.
+ */
+void chatterCallback(const std_msgs::String::ConstPtr& msg)
+{
+  ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+
+int main(int argc, char **argv)
+{
+  /**
+   * The ros::init() function needs to see argc and argv so that it can perform
+   * any ROS arguments and name remapping that were provided at the command line.
+   * For programmatic remappings you can use a different version of init() which takes
+   * remappings directly, but for most command-line programs, passing argc and argv is
+   * the easiest way to do it.  The third argument to init() is the name of the node.
+   *
+   * You must call one of the versions of ros::init() before using any other
+   * part of the ROS system.
+   */
+  ros::init(argc, argv, "listener");
+
+  /**
+   * NodeHandle is the main access point to communications with the ROS system.
+   * The first NodeHandle constructed will fully initialize this node, and the last
+   * NodeHandle destructed will close down the node.
+   */
+  ros::NodeHandle n;
+
+  /**
+   * The subscribe() call is how you tell ROS that you want to receive messages
+   * on a given topic.  This invokes a call to the ROS
+   * master node, which keeps a registry of who is publishing and who
+   * is subscribing.  Messages are passed to a callback function, here
+   * called chatterCallback.  subscribe() returns a Subscriber object that you
+   * must hold on to until you want to unsubscribe.  When all copies of the Subscriber
+   * object go out of scope, this callback will automatically be unsubscribed from
+   * this topic.
+   *
+   * The second parameter to the subscribe() function is the size of the message
+   * queue.  If messages are arriving faster than they are being processed, this
+   * is the number of messages that will be buffered up before beginning to throw
+   * away the oldest ones.
+   */
+  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+
+  /**
+   * ros::spin() will enter a loop, pumping callbacks.  With this version, all
+   * callbacks will be called from within this thread (the main one).  ros::spin()
+   * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
+   */
+  ros::spin();
+
+  return 0;
+}
+
+```
+
+# talker code
+
+```c
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+#include <sstream>
+
+/**
+ * This tutorial demonstrates simple sending of messages over the ROS system.
+ */
+int main(int argc, char **argv)
+{
+  /**
+   * The ros::init() function needs to see argc and argv so that it can perform
+   * any ROS arguments and name remapping that were provided at the command line.
+   * For programmatic remappings you can use a different version of init() which takes
+   * remappings directly, but for most command-line programs, passing argc and argv is
+   * the easiest way to do it.  The third argument to init() is the name of the node.
+   *
+   * You must call one of the versions of ros::init() before using any other
+   * part of the ROS system.
+   */
+  ros::init(argc, argv, "talker");
+
+  /**
+   * NodeHandle is the main access point to communications with the ROS system.
+   * The first NodeHandle constructed will fully initialize this node, and the last
+   * NodeHandle destructed will close down the node.
+   */
+  ros::NodeHandle n;
+
+  /**
+   * The advertise() function is how you tell ROS that you want to
+   * publish on a given topic name. This invokes a call to the ROS
+   * master node, which keeps a registry of who is publishing and who
+   * is subscribing. After this advertise() call is made, the master
+   * node will notify anyone who is trying to subscribe to this topic name,
+   * and they will in turn negotiate a peer-to-peer connection with this
+   * node.  advertise() returns a Publisher object which allows you to
+   * publish messages on that topic through a call to publish().  Once
+   * all copies of the returned Publisher object are destroyed, the topic
+   * will be automatically unadvertised.
+   *
+   * The second parameter to advertise() is the size of the message queue
+   * used for publishing messages.  If messages are published more quickly
+   * than we can send them, the number here specifies how many messages to
+   * buffer up before throwing some away.
+   */
+  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+
+  ros::Rate loop_rate(10);
+
+  /**
+   * A count of how many messages we have sent. This is used to create
+   * a unique string for each message.
+   */
+  int count = 0;
+  while (ros::ok())
+  {
+    /**
+     * This is a message object. You stuff it with data, and then publish it.
+     */
+    std_msgs::String msg;
+
+    std::stringstream ss;
+    ss << "hello world " << count;
+    msg.data = ss.str();
+
+    ROS_INFO("%s", msg.data.c_str());
+
+    /**
+     * The publish() function is how you send messages. The parameter
+     * is the message object. The type of this object must agree with the type
+     * given as a template parameter to the advertise<>() call, as was done
+     * in the constructor above.
+     */
+    chatter_pub.publish(msg);
+
+    ros::spinOnce();
+
+    loop_rate.sleep();
+    ++count;
+  }
+
+  return 0;
+}
+
+```
 
 # 실행 사진
 
