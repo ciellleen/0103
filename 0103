@@ -1,0 +1,115 @@
+# 1. ROS - 로봇 운영 체제
+
+로봇 응용 프로그램을 개발할 때 필요한 하드웨어 추상화, 하위 디바이스 제어, 일반적으로 사용되는 기능의 구현, 프로세스간의 메시지 패싱, 패키지 관리, 개발환경에 필요한 라이브러리와 다양한 개발 및 디버깅 도구를 제공하는 소프트웨어를 제공하는 플랫폼
+
+### ROS의 목적
+
+로보틱스 소프트웨어 개발을 전 세계 레벨에서 공동작업이 가능하도록 하는 환경을 구축하는 것
+
+(로봇 소프트웨어 플랫폼, 미들웨어, 프레임 워크 보다는 연구, 개발에서의 코드 재사용을 극대화하는 것이 초점임)
+
+### ROS의 기능
+
+- 분산 프로세스: 최소 단위의 실행 가능한 프로세스(node, 노드) 형태로 프로그램하며, 각 프로세스는 독립적으로 실행되면서 유기적으로 데이터를 주고 받을 수 있다.
+- 패키지 단위 관리: 같은 작업을 수행하는 여러 개의 프로세스를 패키지 단위로 관리가능하여 개발 또는 사용이 편리하고 배포, 공유, 수정에 용이하다.
+- 공개 레파지토리: 개발자는 github 등에 포젝트를 공개하고 라이센스를 밝히게 되어 있다.
+- API 형태: ROS는 API를 불러와 자신이 사용하던 코드를 쉽게 적용가능하다.
+- 복수의 프로그래밍 지원: ROS는 다양한 언어를 지원한다.(python, c++, lisp, java, c#, lua, ruby 등)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/de08ea34-9f14-41b6-8879-67596167f379/image.png)
+
+# ros - 주요 기능
+
+o hardware abstraction
+o low-level device control
+o implementation of commonly used functionality
+o message-passing between processes o package management
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/f4576e9c-1bcc-4eeb-af97-bb69c3ee1e37/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/1522e45b-0363-42d0-894b-f4e3d684d599/image.png)
+
+# ros - ros wiki
+
+[http://wiki.ros.org](http://wiki.ros.org/)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/98b56db7-d988-4775-ad66-0b3016e0d296/image.png)
+
+# ROS(Robot Operating System)- 중요 개념
+
+- Nodes
+- Messages and Topics
+- Actions
+- Services
+- ROS Master
+- Parameters
+- Packages and Stacks
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/db122ca9-402c-4e1c-b6bd-405cf3895d26/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/f3fd3acb-454f-44eb-ab18-08dafbe3b82c/image.png)
+
+# ROS(Robot Operating System)- Node
+
+- 최소 실행 단위 프로그램 - e.g. sensor driver(s), actuator driver(s), map building, planner, UI, etc.
+
+- 독립적으로 컴파일, 실행, 관리 됨
+- Nodes are written using a ROS client library
+    - roscpp – C++ client library
+    - rospy   – python client library
+- Node는 Topic 을 사용하여 Publish 또는 Subscriber
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/6f692daf-d43d-4ffa-861f-027ea0e8ef10/image.png)
+
+# ROS(Robot Operating System)- 메시지 통신
+
+- Topic – 단방향 통신, 비동기 통신(아무때나 보내고 다 받음)
+    - Publisher : 메시지 송신 / Subscriber : 메시지 수신
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/449b9263-7023-4446-8d5b-4e54fac0a944/image.png)
+
+# ROS의 진정한 목적
+
+로보틱스 소프트웨어 개발을 전세계 레벨에서 공동 작업 가능하도록 환경을 구축하는 
+
+# 실행 사진
+
+![2025-01-03-094616_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/abd2521a-0d54-4115-9a53-f0a8ce8f16d5/e8202271-4596-4a3c-a82e-04529b867718.png)
+
+![2025-01-03-094837_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/24691127-a666-4050-a2a7-9780045bb9f6/d5a6ad3a-0063-4366-b334-19cfba314478.png)
+
+![2025-01-03-094908_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/d496d272-b4fc-42e9-a247-5f33ed08714a/96724160-2da3-4d89-94c4-37213de73096.png)
+
+![2025-01-03-095657_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/44b4c451-1d16-4ce8-9fe6-bacbf20cb01f/5498c009-3178-4e1a-b0ce-f1914e925127.png)
+
+![2025-01-03-100044_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/6e14840e-7789-4aa4-b324-b011d6078595/718416b5-c8a1-40e0-bb6e-2035eed19ce4.png)
+
+![2025-01-03-100219_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/cb32d1aa-496b-43d6-bf8a-d11d171087fe/35e3b1dd-c9d2-4630-8fb8-6a05cbe07bb3.png)
+
+![2025-01-03-100349_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/af0e181d-40de-47be-9e28-5ffea5946fa4/0b28f387-16c1-4253-af6d-3ce78175a987.png)
+
+![2025-01-03-100703_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/e69c7ce6-14b8-4e61-93aa-72f955110ba5/14ac767c-f03e-41ed-8df5-08ea7ca1b4ba.png)
+
+![2025-01-03-100719_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/5816ec0d-ed75-4eb5-adfc-aaf6201a8152/2025-01-03-100719_1920x1080_scrot.png)
+
+![2025-01-03-100823_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/396cfb1d-fee3-4277-90c3-f7ad7a4fb5a6/1d5b1ae3-5957-4cc4-8b05-edfdf6b7b642.png)
+
+![2025-01-03-100836_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/6677d2fc-3da1-4d6a-b83d-190334d18639/d1bb19d7-b2c2-431c-8076-dc611a217741.png)
+
+![2025-01-03-100935_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/057629e5-27fb-470b-aa8c-083a6b81eae8/3fe556f7-b4db-480e-bca3-438161303606.png)
+
+![2025-01-03-101043_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/608f8f0d-e33f-4e69-a82f-9033e63b0b83/dc862b85-f787-43f2-b70f-e0b9d8dfdcf7.png)
+
+![2025-01-03-101049_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/6a64bcc7-7c54-4d82-ab0e-1314c9b8c72f/8b461fa2-e1cc-49bf-991f-16ee8d67427d.png)
+
+![2025-01-03-101514_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/f69a709b-9a70-42a7-9979-fa2bc4e1543b/b667114b-9145-44b9-84b8-1bf16258b7d9.png)
+
+![2025-01-03-103635_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/8342fa1e-21d5-46b5-a0e2-54b6d60b54e8/5d944617-5fac-41c9-aa56-6754c987fa4d.png)
+
+![2025-01-03-104427_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/79a38019-71e7-4c5a-82cf-4ac96cb0289f/e46742dc-50d5-4c6e-94f7-fe5090e4a9d6.png)
+
+![2025-01-03-104513_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/b2d03a95-ab3d-44ea-bf25-6b1d00b579c2/7de06745-0958-44e7-9874-480e29fcef7b.png)
+
+![2025-01-03-104522_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/98c4b6e8-1b2a-453b-a6be-3c7bce18ddf6/46a184a4-575e-4fb9-a27b-59d58e05858f.png)
+
+![2025-01-03-104550_1920x1080_scrot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/43f4c680-a7ab-4f2d-b233-d37ec40472ce/207ad8ab-eb62-415c-9de1-bee57d9b274a/978cd4a5-e4b5-49d1-8a17-3b256a02d97a.png)
